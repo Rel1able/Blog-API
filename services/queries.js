@@ -9,6 +9,16 @@ async function getUserByUsername(username) {
     })
 }
 
+async function createUser(username, password) {
+    await prisma.user.create({
+        data: {
+            name: username,
+            password: password
+        }
+    })
+}
+
 module.exports = {
-    getUserByUsername
+    getUserByUsername,
+    createUser
 }
