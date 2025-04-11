@@ -127,6 +127,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.PostScalarFieldEnum = {
   id: 'id',
   title: 'title',
+  text: 'text',
   published: 'published',
   userId: 'userId',
   createdAt: 'createdAt'

@@ -18,7 +18,36 @@ async function createUser(username, password) {
     })
 }
 
+async function getPosts() {
+    const posts = await prisma.post.findMany();
+    return posts;
+}
+
+async function createPost(title,text, userId) {
+    await prisma.post.create({
+        data: {
+            title: title, 
+            text: text,
+            userId: userId
+
+        }
+    })
+}
+
+async function getPostById(postId) {
+    const post = await prisma.post.findUnique({
+        where: {
+            id: parseInt(postId)
+        }
+    })
+    return post
+}
+
+
 module.exports = {
     getUserByUsername,
-    createUser
+    createUser,
+    getPosts,
+    createPost,
+    getPostById
 }
