@@ -16,8 +16,15 @@ async function createComment(req, res) {
     
 }
 
+async function deleteComment(req, res) {
+    const commentId = req.params.commentId;
+    await db.deleteComment(commentId);
+    res.json("Comment was deleted")
+}
+
 
 module.exports = {
     getComments,
-    createComment
+    createComment,
+    deleteComment
 }
