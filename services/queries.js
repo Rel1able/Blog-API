@@ -7,6 +7,7 @@ async function getUserByUsername(username) {
             name: username
         }
     })
+    return user
 }
 
 async function createUser(username, password) {
@@ -37,7 +38,7 @@ async function createPost(title,text, userId) {
 async function getPostById(postId) {
     const post = await prisma.post.findUnique({
         where: {
-            id: parseInt(postId)
+            id: +postId
         }
     })
     return post
@@ -56,7 +57,7 @@ async function createComment(text, postId, userId) {
 async function getComments(postId) {
     const comments = await prisma.comment.findMany({
         where: {
-            postId: parseInt(postId)
+            postId: +postId
         }
     })
     return comments

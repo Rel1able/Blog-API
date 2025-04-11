@@ -3,6 +3,7 @@ const app = express();
 const authRouter = require("./routes/authRouter");
 const postsRouter = require("./routes/postsRouter");
 const commentsRouter = require("./routes/commentsRouter");
+require("./config/passport");
 const cors = require("cors");
 
 const PORT = process.env.PORT || 3000;

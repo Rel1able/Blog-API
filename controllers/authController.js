@@ -1,5 +1,8 @@
+require("dotenv").config();
 const db = require("../services/queries");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const JWT_SECRET = process.env.JWT_SECRET;
 
 async function createUser(req, res, next) {
     try {
@@ -11,6 +14,18 @@ async function createUser(req, res, next) {
     }
 }
 
+
+async function createToken(req, res) {
+    const token = jwt.sign({id: req.user.id, username: req.user.name}, JWT_SECRET)
+    res.status(200).json(token);
+}
+    
+async function protectedRoute(req, res) {
+    res.json("Hello world");
+}
+
 module.exports = {
-    createUser
+    createUser,
+    createToken,
+    protectedRoute
 }
