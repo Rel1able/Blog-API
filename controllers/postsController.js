@@ -17,8 +17,23 @@ async function getPostById(req, res) {
     res.json(post);
 }
 
+async function editPost(req, res) {
+    const postId = req.params.id;
+    await db.editPost(postId, req.body.title, req.body.text);
+    res.json("Post was updated");
+}
+
+async function deletePost(req, res) {
+    const postId = req.params.id;
+    await db.deletePost(postId);
+    res.json("Post was deleted");
+
+}
+
 module.exports = {
     getPosts,
     createPost,
-    getPostById
+    getPostById,
+    deletePost,
+    editPost
 }

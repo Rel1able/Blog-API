@@ -70,6 +70,31 @@ async function deleteComment(commentId) {
     })
 }
 
+async function editPost(postId, title, text) {
+    await prisma.post.update({
+        where: {
+            id: +postId
+        },
+        data: {
+            title: title,
+            text: text
+        }
+    })
+}
+
+async function deletePost(postId) {
+    await prisma.comment.deleteMany({
+        where: {
+            postId: +postId
+        }
+    })
+    await prisma.post.delete({
+        where: {
+            id: +postId
+        }
+    })
+}
+
 
 module.exports = {
     getUserByUsername,
@@ -79,5 +104,7 @@ module.exports = {
     getPostById,
     createComment,
     getComments,
-    deleteComment
+    deleteComment,
+    editPost,
+    deletePost
 }
