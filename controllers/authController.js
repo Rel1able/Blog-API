@@ -17,15 +17,11 @@ async function createUser(req, res, next) {
 
 async function createToken(req, res) {
     const token = jwt.sign({id: req.user.id, username: req.user.name}, JWT_SECRET)
-    res.status(200).json(token);
+    res.status(200).json({token, user: req.user});
 }
     
-async function protectedRoute(req, res) {
-    res.json("Hello world");
-}
-
 module.exports = {
     createUser,
     createToken,
-    protectedRoute
+
 }
