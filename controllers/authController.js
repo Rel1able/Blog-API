@@ -8,7 +8,7 @@ async function createUser(req, res, next) {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         await db.createUser(req.body.username, hashedPassword);
-        res.redirect("/");
+        res.json({message: "User was created"})
     } catch (err) {
         return next(err);
     }
