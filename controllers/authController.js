@@ -16,8 +16,8 @@ async function createUser(req, res, next) {
 
 
 async function createToken(req, res) {
-    const token = jwt.sign({id: req.user.id, username: req.user.name}, JWT_SECRET)
-    res.status(200).json({token, user: req.user});
+    const token = jwt.sign({id: req.user.id, username: req.user.username}, JWT_SECRET)
+    res.status(200).json({token});
 }
     
 module.exports = {

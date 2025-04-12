@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 async function getUserByUsername(username) {
     const user = await prisma.user.findUnique({
         where: {
-            name: username
+            username: username
         }
     })
     return user
@@ -13,7 +13,7 @@ async function getUserByUsername(username) {
 async function createUser(username, password) {
     await prisma.user.create({
         data: {
-            name: username,
+            username: username,
             password: password
         }
     })
@@ -95,8 +95,6 @@ async function deletePost(postId) {
         }
     })
 }
-
-
 
 module.exports = {
     getUserByUsername,
