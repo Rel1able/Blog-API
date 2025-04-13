@@ -25,17 +25,9 @@ async function createToken(req, res) {
     res.status(200).json({token, user});
 }
 
-async function handleLogout(req, res, next) {
-    req.logout((err) => {
-        return next(err);
-    })
-    res.json({msg: "You was successfully logged out"})
-}
-
     
 module.exports = {
     createUser,
     createToken,
-    handleLogout
 
 }
