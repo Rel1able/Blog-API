@@ -22,7 +22,7 @@ async function createToken(req, res) {
         role: req.user.role
     }
     const token = jwt.sign({id: user.id, username: user.username, role: user.role}, JWT_SECRET)
-    res.status(200).json({token, user});
+    res.status(200).json({token}, user);
 }
 
     
