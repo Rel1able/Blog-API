@@ -16,13 +16,9 @@ async function createUser(req, res, next) {
 
 
 async function createToken(req, res) {
-    const user = {
-        id: req.user.id,
-        username: req.user.username,
-        role: req.user.role
-    }
-    const token = jwt.sign({id: user.id, username: user.username, role: user.role}, JWT_SECRET)
-    res.status(200).json({token}, user);
+    const { id, username, role } = req.user;
+    const token = jwt.sign({id: id, username: username, role: role}, JWT_SECRET)
+    res.status(200).json({token, user: {id, username, role}});
 }
 
     
