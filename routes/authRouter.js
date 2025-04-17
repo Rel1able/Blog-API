@@ -5,7 +5,7 @@ const passport = require("passport");
 
 
 
-authRouter.post("/sign-up", authController.createUser);
+authRouter.post("/sign-up",authController.validateSignUp, authController.createUser);
 authRouter.post("/login", passport.authenticate("local", { session: false }), authController.createToken);
 
 
