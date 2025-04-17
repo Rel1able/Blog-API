@@ -20,7 +20,13 @@ async function createUser(username, password) {
 }
 
 async function getPosts() {
-    const posts = await prisma.post.findMany();
+    const posts = await prisma.post.findMany({
+        include: {
+            user: {
+                select: {username: true}
+            }
+        }
+    });
     return posts;
 }
 
@@ -39,6 +45,11 @@ async function getPostById(postId) {
     const post = await prisma.post.findUnique({
         where: {
             id: +postId
+        },
+        include: {
+            user: {
+                select: {username: true}
+            }
         }
     })
     return post
@@ -58,6 +69,14 @@ async function getComments(postId) {
     const comments = await prisma.comment.findMany({
         where: {
             postId: +postId
+        },
+        orderBy: {
+            createdAt: "desc",
+        },
+        include: {
+            user: {
+                select: {username: true}
+            }
         }
     })
     return comments
