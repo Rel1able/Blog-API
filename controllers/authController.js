@@ -10,7 +10,7 @@ const validateSignUp = [
         .trim()
         .isLength({ min: 3 }).withMessage("Username must be at least 3 characters long")
         .custom((async (username) => {
-            const user = db.getUserByUsername(username)
+            const user = await db.getUserByUsername(username)
             if (user) {
                 throw new Error("Username is already taken")
             }
