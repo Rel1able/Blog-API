@@ -25,6 +25,9 @@ async function getPosts() {
             user: {
                 select: {username: true}
             }
+        },
+        orderBy: {
+            createdAt: "desc"
         }
     });
     return posts;
