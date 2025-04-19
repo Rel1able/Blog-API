@@ -118,6 +118,52 @@ async function deletePost(postId) {
     })
 }
 
+async function getPublishedPosts() {
+    const publishedPosts = await prisma.post.findMany({
+        where: {
+            published: true
+        },
+        orderBy: {
+            createdAt: "desc"
+        }
+    })
+    return publishedPosts
+}
+
+async function getUnpublishedPosts() {
+    const unpublishedPosts = await prisma.post.findMany({
+        where: {
+            published: false
+        },
+        orderBy: {
+            createdAt: "desc"
+        }
+    })
+    return unpublishedPosts
+}
+
+async function publishPost(postId) {
+    await prisma.post.update({
+        where: {
+            id: +postId
+        },
+        data: {
+            published: true
+        }
+    })
+}
+
+async function unpublishPost(postId) {
+    await prisma.post.update({
+        where: {
+            id: +postId
+        },
+        data: {
+            published: false
+        }
+    })
+}
+
 module.exports = {
     getUserByUsername,
     createUser,
@@ -128,5 +174,9 @@ module.exports = {
     getComments,
     deleteComment,
     editPost,
-    deletePost
+    deletePost,
+    getPublishedPosts,
+    getUnpublishedPosts,
+    publishPost,
+    unpublishPost
 }

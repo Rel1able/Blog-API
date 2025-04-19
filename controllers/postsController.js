@@ -30,10 +30,36 @@ async function deletePost(req, res) {
 
 }
 
+async function getPublishedPosts(req, res) {
+    const publishedPosts = await db.getPublishedPosts();
+    res.json(publishedPosts);
+}
+
+async function getUnpublishedPosts(req, res) {
+    const unpublishedPosts = await db.getUnpublishedPosts();
+    res.json(unpublishedPosts);
+}
+
+async function publishPost(req, res) {
+    const postId = req.params.id;
+    await db.publishPost(postId);
+    res.json("Published");
+}
+
+async function unpublishPost(req, res) {
+    const postId = req.params.id;
+    await db.unpublishPost(postId);
+    res.json("Unpublished");
+}
+
 module.exports = {
     getPosts,
     createPost,
     getPostById,
     deletePost,
-    editPost
+    editPost,
+    getPublishedPosts,
+    getUnpublishedPosts,
+    publishPost,
+    unpublishPost
 }
