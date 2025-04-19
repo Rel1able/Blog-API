@@ -125,6 +125,11 @@ async function getPublishedPosts() {
         },
         orderBy: {
             createdAt: "desc"
+        },
+        include: {
+            user: {
+                select: {username: true}
+            }
         }
     })
     return publishedPosts
@@ -137,6 +142,11 @@ async function getUnpublishedPosts() {
         },
         orderBy: {
             createdAt: "desc"
+        },
+        include: {
+            user: {
+                select: {username: true}
+            }
         }
     })
     return unpublishedPosts
